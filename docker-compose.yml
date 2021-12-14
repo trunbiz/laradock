@@ -2048,3 +2048,18 @@ services:
         - ${TARANTOOL_ADMIN_PORT}:80
       networks:
         - backend
+ ### Khởi tạo mariadb service 2 #########################
+    mariadb_rendervn:
+      build: ./mariadb
+      volumes:
+        - ${DATA_PATH_HOST_KOWALSKI}/mariadb:/var/lib/mysql
+        - ${MARIADB_ENTRYPOINT_INITDB_RENDERVN}:/docker-entrypoint-initdb.d
+      ports:
+        - "${MARIADB_PORT_RENDERVN}:3306"
+      environment:
+        - MYSQL_DATABASE=${MARIADB_DATABASE_RENDERVN}
+        - MYSQL_USER=${MARIADB_USER_RENDERVN}
+        - MYSQL_PASSWORD=${MARIADB_PASSWORD_RENDERVN}
+        - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD_RENDERVN}
+      networks:
+        - backend
